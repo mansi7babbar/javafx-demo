@@ -36,7 +36,6 @@ public class JavaFXLoader extends Application {
     public final static String LOADER_ICON = IMAGES + "/loader-icon.jpg";
     public final static String LOADER_CLOSE_BUTTON = IMAGES + "/loader-close-button.png";
     public final static String LOADER_CLOSE_BUTTON_HOVERED = IMAGES + "/loader-close-button-hovered.png";
-    public final static String LOADER_CLOSE_BUTTON_PRESSED = IMAGES + "/loader-close-button-pressed.png";
 
     public final static String LOADER_STAGE_TITLE = "Loader";
     public final static String LOADER_STATUS = "Loading";
@@ -175,9 +174,6 @@ public class JavaFXLoader extends Application {
                 m_loaderCloseButtonImage.setImage(m_image);
             } else if (event.getEventType() == MouseEvent.MOUSE_EXITED) {
                 m_image = new Image(LOADER_CLOSE_BUTTON);
-                m_loaderCloseButtonImage.setImage(m_image);
-            } else if (event.getEventType() == MouseEvent.MOUSE_PRESSED) {
-                m_image = new Image(LOADER_CLOSE_BUTTON_PRESSED);
                 m_loaderCloseButtonImage.setImage(m_image);
             }
         };
