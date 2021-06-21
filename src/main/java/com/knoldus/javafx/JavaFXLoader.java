@@ -27,14 +27,12 @@ public class JavaFXLoader extends Application {
     public final static String LOADER_CONTENT_ID = "loader-content-id";
     public final static String LOADER_CONTROLS_ID = "loader-controls-id";
     public final static String LOADER_LOGO_ID = "loader-logo-id";
-    public final static String LOADER_NAME_ID = "loader-name-id";
     public final static String LOADER_STATUS_ID = "loader-status-id";
     public final static String LOADER_CLOSE_BUTTON_ID = "loader-close-button-id";
 
     public final static String IMAGES = "file:src/main/resources/img";
     public final static String LOADER_BACKGROUND = IMAGES + "/loader-background.jpg";
     public final static String LOADER_LOGO = IMAGES + "/loader-logo.gif";
-    public final static String LOADER_NAME = IMAGES + "/loader-name.png";
     public final static String LOADER_ICON = IMAGES + "/loader-icon.jpg";
     public final static String LOADER_CLOSE_BUTTON = IMAGES + "/loader-close-button.png";
     public final static String LOADER_CLOSE_BUTTON_HOVERED = IMAGES + "/loader-close-button-hovered.png";
@@ -46,22 +44,21 @@ public class JavaFXLoader extends Application {
     public final static double LOADER_CLOSE_BUTTON_SIZE = 24;
     private static final double LOADER_WIDTH = 768;
     private static final double LOADER_HEIGHT = 464;
-    private static final double LOADER_LOGO_SIZE = 100;
-    private static final double LOADER_NAME_WIDTH = 206;
-    private static final double LOADER_NAME_HEIGHT = 75;
+    private static final double LOADER_LOGO_SIZE = 200;
 
     private static double xOffset = 0;
     private static double yOffset = 0;
 
-    private final double LOADER_STATUS_FONT_SIZE = 14;
-    private final Color LOADER_STATUS_COLOR = Color.rgb(203, 206, 220, 1);
+    private final double LOADER_STATUS_FONT_SIZE = 24;
+    private final String LOADER_STATUS_FONT_FAMILY = "Roboto Medium";
+    private final Color LOADER_STATUS_COLOR = Color.rgb(25, 25, 25, 1);
+    private final Font LOADER_STATUS_FONT = Font.font(LOADER_STATUS_FONT_FAMILY, FontWeight.BOLD, LOADER_STATUS_FONT_SIZE);
 
     private final StackPane m_loaderContainer = new StackPane();
     private final VBox m_loaderContent = new VBox();
     private final HBox m_loaderControls = new HBox();
     private final ImageView m_loaderBackground = new ImageView();
     private final ImageView m_loaderLogo = new ImageView();
-    private final ImageView m_loaderName = new ImageView();
     private final ImageView m_loaderCloseButtonImage = new ImageView();
     private final Text m_loaderStatus = new Text();
     private final Button m_loaderCloseButton = new Button();
@@ -123,10 +120,9 @@ public class JavaFXLoader extends Application {
 
     public void initializeLoaderContent() {
         initializeLoaderLogo();
-        initializeLoaderName();
         initializeLoaderStatus();
 
-        m_loaderContent.getChildren().addAll(m_loaderLogo, m_loaderName);
+        m_loaderContent.getChildren().addAll(m_loaderLogo, m_loaderStatus);
 
         m_loaderContent.setId(LOADER_CONTENT_ID);
         m_loaderContent.setSpacing(10);
@@ -142,20 +138,11 @@ public class JavaFXLoader extends Application {
         m_loaderLogo.setFitHeight(LOADER_LOGO_SIZE);
     }
 
-    public void initializeLoaderName() {
-        m_image = new Image(LOADER_NAME);
-
-        m_loaderName.setId(LOADER_NAME_ID);
-        m_loaderName.setImage(m_image);
-        m_loaderName.setFitWidth(LOADER_NAME_WIDTH);
-        m_loaderName.setFitHeight(LOADER_NAME_HEIGHT);
-    }
-
     public void initializeLoaderStatus() {
         m_loaderStatus.setText(LOADER_STATUS);
         m_loaderStatus.setId(LOADER_STATUS_ID);
         m_loaderStatus.setFill(LOADER_STATUS_COLOR);
-        m_loaderStatus.setFont(Font.font("Roboto Medium", FontWeight.MEDIUM, LOADER_STATUS_FONT_SIZE));
+        m_loaderStatus.setFont(LOADER_STATUS_FONT);
         m_loaderStatus.setTextAlignment(TextAlignment.CENTER);
     }
 
@@ -203,10 +190,7 @@ public class JavaFXLoader extends Application {
     }
 
     private EventHandler<ActionEvent> handleCloseEvent() {
-        return event ->
-        {
-            System.exit(0);
-        };
+        return event -> System.exit(0);
     }
 
     private void dragLoader() {
